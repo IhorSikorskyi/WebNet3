@@ -10,6 +10,8 @@ namespace WebNet3.Views.HtmlHelper
         {
             var content = new HtmlContentBuilder();
 
+            content.AppendHtml($"<div style=\"text-align: center; margin-bottom: 10px;\"><h2>Детальніше по даті:{ada.date}</h2></div>");
+
             content.AppendHtml($"<div style=\"color: black;\"><b>Ticker&nbsp:&nbsp</b> {ada.ticker}</div>");
             content.AppendHtml($"<div style=\"color: black;\"><b>Date&nbsp;&nbsp;&nbsp;:&nbsp;</b>{ada.date}</div>");
             content.AppendHtml($"<div style=\"color: black;\"><b>Open&nbsp;&nbsp;:&nbsp;</b>{ada.open}</div>");

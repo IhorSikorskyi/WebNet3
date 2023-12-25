@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Інформація за день";
     @using WebNet3.Views.HtmlHelper
-    @model WebNet3.Models.Ada
+@model WebNet3.Models.Ada
 }
+
+<div style="text-align: center; margin-bottom: 10px;">
+    <h2>Доступні дані</h2>
+</div>
+
 @Html.CryptoDay(Model)
