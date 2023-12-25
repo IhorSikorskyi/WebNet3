@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @model WebNet3.Models.Ada
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Аналіз ринку біржі криптовалют</h1>
+    <form method="post" class="mt-3">
+        <div class="form-row row mb-3">
+            <!-- Date From Dropdown -->
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.date, "Date from:")
+                @Html.DropDownListFor(model => model.date, new SelectList(Dict.Date(), "Key", "Value"), "Select options", new { @class = "form-control", @id = "dateFrom" })
+            </div>
+
+            <!-- Date To Dropdown -->
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.date, "Date to:")
+                @Html.DropDownListFor(model => model.date, new SelectList(Dict.Date(), "Key", "Value"), "Select options", new { @class = "form-control", @id = "dateTo" })
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary" onclick="updateChart()">Оцінити</button>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="form-row row mb-3">
+            <div class="col-md-3">
+                @Html.Label("Графік оцінки ринку:")
+            </div>
+
+            <!-- Chart Canvas -->
+            <div style="width: 800px; height: 500px; background-color: LightCoral;">
+                <canvas id="marketChart" width="775" height="470"></canvas>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var marketChart;
+
+    function updateChart() {
+        var dateFrom = document.getElementById('dateFrom').value;
+        var dateTo = document.getElementById('dateTo').value;
+
+        if (!dateFrom || !dateTo) {
+            alert("Please select both 'Date from' and 'Date to'.");
+            return;
+        }
+
+        var filteredData = {
+            labels: ['Date1', 'Date2', 'Date3', 'Date4', 'Date5'],
+            datasets: [{
+                label: 'Market Analysis',
+                data: [50, 75, 60, 80, 65],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var ctx = document.getElementById('marketChart').getContext('2d');
+
+        if (marketChart) {
+            marketChart.data = filteredData;
+            marketChart.update();
+        } else {
+            marketChart = new Chart(ctx, {
+                type: 'bar',
+                data: filteredData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'black'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+</script>

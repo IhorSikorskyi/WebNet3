@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Збірник інформації";
+    @using WebNet3.Models;
+    @model IEnumerable<Ada>
+}
+
+<div class="tabel d-flex justify-content-center mt-2">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td class="col-1">Crypto Ticket</td>
+            <td class="col-2">Data</td>
+        </tr>
+        </thead>
+        @foreach (Ada a in Model)
+        {
+            <tr>
+                <td>@a.ticker</td>
+                <td><a class="nav-link" href="/CryptoDayInfo/@a.date">@a.date</a></td>
+            </tr>
+        }
+    </table>
+</div>
